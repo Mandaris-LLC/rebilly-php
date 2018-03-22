@@ -25,6 +25,8 @@ use Rebilly\Rest\Service;
  */
 final class ApiKeyService extends Service
 {
+    private const API_VERSION = 'experimental';
+
     /**
      * @param array|ArrayObject $params
      *
@@ -32,7 +34,7 @@ final class ApiKeyService extends Service
      */
     public function paginator($params = [])
     {
-        return new Paginator($this->client(), 'api-keys', $params);
+        return new Paginator($this->client(), $this::API_VERSION . '/api-keys', $params);
     }
 
     /**
@@ -42,7 +44,7 @@ final class ApiKeyService extends Service
      */
     public function search($params = [])
     {
-        return $this->client()->get('api-keys', $params);
+        return $this->client()->get($this::API_VERSION . '/api-keys', $params);
     }
 
     /**
@@ -55,7 +57,7 @@ final class ApiKeyService extends Service
      */
     public function load($apiKeyId, $params = [])
     {
-        return $this->client()->get('api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId] + (array) $params);
+        return $this->client()->get($this::API_VERSION . '/api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId] + (array) $params);
     }
 
     /**
@@ -69,9 +71,9 @@ final class ApiKeyService extends Service
     public function create($data, $apiKeyId = null)
     {
         if (isset($apiKeyId)) {
-            return $this->client()->put($data, 'api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
+            return $this->client()->put($data, $this::API_VERSION . '/api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
         } else {
-            return $this->client()->post($data, 'api-keys');
+            return $this->client()->post($data, $this::API_VERSION . '/api-keys');
         }
     }
 
@@ -85,7 +87,7 @@ final class ApiKeyService extends Service
      */
     public function update($apiKeyId, $data)
     {
-        return $this->client()->put($data, 'api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
+        return $this->client()->put($data, $this::API_VERSION . '/api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
     }
 
     /**
@@ -93,6 +95,6 @@ final class ApiKeyService extends Service
      */
     public function delete($apiKeyId)
     {
-        $this->client()->delete('api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
+        $this->client()->delete($this::API_VERSION . '/api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
     }
 }
