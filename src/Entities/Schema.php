@@ -141,7 +141,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new LeadSource($content);
             },
             'payment-cards' => function (array $content) {
-                return new Collection(new PaymentCard(), $content);
+                return new PaymentCard($content);
             },
             'payment-cards/{cardId}' => function (array $content) {
                 return new PaymentCard($content);
