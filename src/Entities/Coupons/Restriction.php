@@ -38,7 +38,7 @@ abstract class Restriction extends Resource
     /**
      * {@inheritdoc}
      */
-    public function __construct(array $data = [])
+    public function __construct($data = [])
     {
         parent::__construct(['type' => $this->restrictionType()] + $data);
     }
