@@ -496,9 +496,11 @@ final class Client
         $location = $response->hasHeader('Location')
             ? $this->createUri($response->getHeaderLine('Location'))
             : $request->getUri();
-
+        
         $uri = urldecode($location->getPath());
-
+        if ($uri == '/') {
+            $uri = urldecode($request->getUri()->getPath());
+        }
         // Remove version from URI
         $uri = preg_replace('#^/' . self::CURRENT_VERSION . '#', '', $uri);
 
