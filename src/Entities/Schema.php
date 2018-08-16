@@ -18,6 +18,7 @@ use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
 use Rebilly\Entities\EmailNotifications\EmailNotification;
 use Rebilly\Entities\EmailNotifications\EmailNotificationTracking;
+use Rebilly\Entities\KycDocuments\KycDocument;
 use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
@@ -325,6 +326,36 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'tracking/email-notifications/{trackId}' => function (array $content) {
                 return new EmailNotificationTracking($content);
+            },
+            'gateway-accounts/{gatewayAccountId}/downtime-schedules' => function (array $content) {
+                return new Collection(new GatewayAccountDowntime(), $content);
+            },
+            'gateway-accounts/{gatewayAccountId}/downtime-schedules/{downtimeId}' => function (array $content) {
+                return new GatewayAccountDowntime($content);
+            },
+            'payment-instrument-validation' => function (array $content) {
+                return new Collection(new PaymentCardValidation(), $content);
+            },
+            'payment-instrument-validation/{paymentInstrumentValidationId}' => function (array $content) {
+                return PaymentInstrumentValidation::createFromData($content);
+            },
+            'subscription-cancellations' => function (array $content) {
+                return new Collection(new SubscriptionCancellation(), $content);
+            },
+            'subscription-cancellations/{cancellationId}' => function (array $content) {
+                return new SubscriptionCancellation($content);
+            },
+            'subscription-reactivations' => function (array $content) {
+                return new Collection(new SubscriptionReactivation(), $content);
+            },
+            'subscription-reactivations/{reactivationId}' => function (array $content) {
+                return new SubscriptionReactivation($content);
+            },
+            'kyc-documents' => function (array $content) {
+                return new Collection(new KycDocument(), $content);
+            },
+            'kyc-documents/{id}' => function (array $content) {
+                return new KycDocument($content);
             },
         ];
     }

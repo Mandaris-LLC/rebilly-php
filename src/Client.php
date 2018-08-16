@@ -68,7 +68,9 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\PlanService plans()
  * @method Services\ResetPasswordTokenService resetPasswordTokens()
  * @method Services\SubscriptionService subscriptions()
+ * @method Services\SubscriptionCancellationService subscriptionCancellations()
  * @method Services\TransactionService transactions()
+ * @method Services\SubscriptionReactivationService subscriptionReactivations()
  * @method Services\WebsiteService websites()
  * @method Services\NoteService notes()
  * @method Services\OrganizationService organizations()
@@ -95,6 +97,9 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\WebhookTrackingService webhooksTracking()
  * @method Services\EmailNotificationService emailNotifications()
  * @method Services\EmailNotificationTrackingService emailNotificationsTracking()
+ * @method Services\GatewayAccountDowntimeService gatewayDowntimes()
+ * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
+ * @method Services\KycService kycDocuments()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -104,7 +109,7 @@ final class Client
     const BASE_HOST = 'https://api.rebilly.com';
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
-    const SDK_VERSION = '2.0.7';
+    const SDK_VERSION = '2.2.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -126,7 +131,9 @@ final class Client
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
         'subscriptions' => Services\SubscriptionService::class,
+        'subscriptionCancellations' => Services\SubscriptionCancellationService::class,
         'transactions' => Services\TransactionService::class,
+        'subscriptionReactivations' => Services\SubscriptionReactivationService::class,
         'websites' => Services\WebsiteService::class,
         'files' => Services\FileService::class,
         'attachments' => Services\AttachmentService::class,
@@ -152,6 +159,9 @@ final class Client
         'webhooksTracking' => Services\WebhookTrackingService::class,
         'emailNotifications' => Services\EmailNotificationService::class,
         'emailNotificationsTracking' => Services\EmailNotificationTrackingService::class,
+        'gatewayDowntimes' => Services\GatewayAccountDowntimeService::class,
+        'paymentInstrumentValidation' => Services\PaymentInstrumentValidationService::class,
+        'kycDocuments' => Services\KycService::class,
     ];
 
     /** @var array */
