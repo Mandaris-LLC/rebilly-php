@@ -72,7 +72,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
             unset($data['_metadata']);
         }
 
-        if (isset($data['data']) && !((new \ReflectionClass($this->prototype))->getShortName() == 'Payment')) {
+        if (isset($data['data'])) {
             $data = $data['data'];
         }
 
